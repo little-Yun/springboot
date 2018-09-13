@@ -1,0 +1,13 @@
+#ip白名单
+ipconfig=192.168.66.188
+
+
+#mq服务器端口设置
+activemq.brokerUrl=tcp://192.168.2.30:61616
+activemq.inMemory=false
+activemq.pass=admin
+activemq.password=admin
+activemq.poolEnable=false
+activemq.poolExpiryTimeout=10000
+activemq.poolIdleTimeout=30000
+activemq.poolMaxConnections=50
