@@ -11,7 +11,7 @@
 	<name>springboot</name>
 	<description>Demo project for Spring Boot</description>
 
-	<!-- 集成 父POM -->
+	<!-- 继承 父POM -->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
