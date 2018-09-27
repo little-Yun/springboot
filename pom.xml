@@ -40,6 +40,19 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+	<!-- springcloud 声明依赖-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Dalston.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<dependencies>
 		<!-- springboot WEB 服务-->
 		<dependency>
@@ -96,18 +109,14 @@
 		</dependency>
 
 		<!-- spring cloud 相关 start -->
-
-		<!--<dependency>
+		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		</dependency>
-
-		&lt;!&ndash; 集群相关 如：zookeeper 服务注册和发现等&ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
-		</dependency>-->
-
+		</dependency>
 		<!-- spring cloud 相关 end -->
 		<!-- ASM 框架-->
 		<dependency>

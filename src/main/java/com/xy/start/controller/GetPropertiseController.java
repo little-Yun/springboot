@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
  * 获取spring boot配置几种方式
  */
 @RestController
-public class SpringbootGetPropertiseController {
+public class GetPropertiseController {
 
     // 配置改造
     @Autowired
@@ -24,6 +24,9 @@ public class SpringbootGetPropertiseController {
     //通过注解获取配置文件信息
     @Value("${com.xy.title}")
     private String title;
+
+    @Value("${com.test}")
+    private String test;
 
     @RequestMapping(value = "/getType")
     // 读取springboot启动加载的环境配置文件
@@ -39,6 +42,8 @@ public class SpringbootGetPropertiseController {
 
     @RequestMapping("/getTetile")
     public String getTitle1(){
+        System.out.println("get test:" + test);
+        System.out.println("get title:"+ title);
         return "get titile:" + title;
     }
 }
