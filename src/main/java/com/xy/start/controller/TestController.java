@@ -34,6 +34,9 @@ public class TestController {
     @RequestMapping(value = "/queryStudentInfo")
     @ResponseBody
     public String queryStudentInfo(HttpServletRequest request){
+        String serverName = request.getServerName();
+        System.out.println(serverName);
+
         String name = request.getParameter("name");
         Student student = testService.getStudentInfoByName(name);
 

@@ -1,40 +1,42 @@
 package com.xy.study.extend;
 
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+import java.io.IOException;
 
-public class BaseAjaxController {
+public abstract class BaseAjaxController extends HandlerInterceptorAdapter {
 
     Log logger = LogFactory.getLog(this.getClass());
 
-    public boolean before(HttpServletRequest request){
-        Cookie [] cookies = request.getCookies();
-        Map<String,Object> map = new HashMap<>();
-        if(null != cookies){
-            for (Cookie cookie: cookies) {
-                if(cookie == null) continue;
-                map.put(cookie.getName(),cookie.getValue());
-            }
-        }
 
+    @Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        logger.info("BaseAjaxController prehandle~!");
 
-        // 单点登陆检查
-        boolean isLoggin = MapUtils.getBooleanValue(map,"logInfo");
-        logger.info("check isLoggin:" + isLoggin);
+        execute(request, response);
 
-        return  isLoggin;
+        return super.preHandle(request, response, handler);
     }
 
-    public String execute(HttpServletRequest request, HttpServletResponse response){
-        // 子类继承
+    /**
+     * 登陆检查
+     * @param request
+     * @return
+     */
+    protected boolean before(HttpServletRequest request){
+     return  true;
+    }
 
-        return null;
+    // 子类方法重写
+    protected abstract String execute(HttpServletRequest request, HttpServletResponse response);
+
+
+    private void processresult(HttpServletResponse response,String resultMessage) throws IOException {
+        response.getWriter().write(resultMessage);
+        response.setContentType("text/html;charset=UTF-8");
     }
 }

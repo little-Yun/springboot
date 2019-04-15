@@ -1,10 +1,12 @@
 package com.xy.start.dao;
 
 import com.xy.start.bean.Student;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Select;
 
-@Repository
+@Mapper
 public interface StudentMapper {
 
 //    @Select("SELECT name,age FROM xy_data_student WHERE name = #{name}")

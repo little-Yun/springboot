@@ -54,19 +54,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!--&lt;!&ndash; springboot WEB 服务&ndash;&gt;
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-
-		&lt;!&ndash; springboot 测试 &ndash;&gt;
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-		</dependency>-->
-
 		<!-- MQ 依赖 JAR -->
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
@@ -77,7 +64,14 @@
 		<!-- spring boot 整合 springboot 依赖JAR -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-amqp</artifactId>
+			<artifactId>spring-boot-starter</artifactId>
+			<!-- 解决包冲突 -->
+			<exclusions>
+				<exclusion>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-logging</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<!-- 错误："Configuration Annotation Proessor not found in classpath”
