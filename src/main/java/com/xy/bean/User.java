@@ -1,30 +1,18 @@
 package com.xy.bean;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.PropertySource;
+import lombok.Data;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
+@Data
 @Component
-@ConfigurationProperties(prefix = "com.xy")
-@PropertySource("classpath:/application.properties")
-//不用这个注解，默认就是加载application.properties资源文件
+@Configuration
 public class User {
+
+    @Value("${com.xy.type}")
     private String type;
+
+    @Value("${com.xy.title}")
     private String title;
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
 }

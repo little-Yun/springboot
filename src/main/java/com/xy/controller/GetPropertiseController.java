@@ -1,6 +1,7 @@
 package com.xy.controller;
 
 import com.xy.bean.User;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
@@ -10,29 +11,19 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * 获取spring boot配置几种方式
  */
+@Slf4j
 @RestController
 public class GetPropertiseController {
 
-    // 配置改造
     @Autowired
     private User user;
-
-    //通过注入环境变量来获取配置信息
-    @Autowired
-    private Environment env;
 
     //通过注解获取配置文件信息
     @Value("${com.xy.title}")
     private String title;
 
-    @Value("${com.test}")
+    @Value("${com.xy.test}")
     private String test;
-
-    @RequestMapping(value = "/getType")
-    // 读取springboot启动加载的环境配置文件
-    public String getType() {
-        return "get getType:" + env.getProperty("com.xy.type");
-    }
 
     @RequestMapping("getType1")
     // 配置读取
@@ -42,8 +33,8 @@ public class GetPropertiseController {
 
     @RequestMapping("/getTetile")
     public String getTitle1() {
-        System.out.println("get test:" + test);
-        System.out.println("get title:" + title);
+        log.info("get test:{}", test);
+        log.info("get user title:{}", title);
         return "get titile:" + title;
     }
 }

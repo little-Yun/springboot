@@ -1,12 +1,22 @@
 server:
-  port: 8088
-  servlet:
-      context-path: /xiaoy
-
+    port: 8088
+    servlet:
+        context-path: /xiaoy
+        display-name: springboot_study
+    #多环境配置读取配置项
+    profiles:
+        active: dev
 spring:
-  application:
-    name: spring_boot_hi
+    application:
+        name: springboot_study
+
+#Discovery Server Access
 eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+    client:
+        #解决启动报错java.net.ConnectException: Connection refused: connec
+        fetchRegistry: false
+        registerWithEureka: false
+        serviceUrl:
+            defaultZone: http://localhost:8761/eureka/
+    instance:
+        hostname: localhost
