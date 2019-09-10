@@ -1,0 +1,13 @@
+server:
+  port: 8088
+  servlet:
+      context-path: /xiaoy
+
+spring:
+  application:
+    name: spring_boot_hi
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
