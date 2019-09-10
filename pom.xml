@@ -79,7 +79,7 @@
             <exclusions>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-bbot-starter-tomcat</artifactId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
                 <exclusion>
                     <groupId>org.springframework.boot</groupId>
@@ -106,7 +106,6 @@
             <version>5.15.3</version>
         </dependency>
 
-        <!-- spring boot 整合 springboot 依赖JAR -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
@@ -119,8 +118,7 @@
             </exclusions>
         </dependency>
 
-        <!-- 错误："Configuration Annotation Proessor not found in classpath”
-        解决方法是pom文件中加依赖 org.springframework.boot spring-boot-configuration-processor true -->
+        <!--读取配置项值 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>
@@ -179,13 +177,13 @@
                 </includes>
                 <filtering>false</filtering>
             </resource>
-            <resource>
+           <!-- <resource>
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>*</include>
                 </includes>
                 <filtering>false</filtering>
-            </resource>
+            </resource>-->
         </resources>
     </build>
 </project>

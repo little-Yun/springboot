@@ -1,5 +1,6 @@
 package com.xy.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.xy.service.TestService;
 import com.xy.bean.Student;
@@ -25,8 +26,7 @@ public class TestController {
         int age = Integer.valueOf(request.getParameter("age"));
         testService.add(name, age);
 
-        JSONObject json = new JSONObject();
-        this.getResult(json);
+        JSONObject json = this.getResult(null);
         return json.toJSONString();
     }
 
@@ -35,18 +35,22 @@ public class TestController {
     public String queryStudentInfo(HttpServletRequest request) {
         String serverName = request.getServerName();
         log.info("serverName:{}", serverName);
-
         String name = request.getParameter("name");
         Student student = testService.getStudentInfoByName(name);
-
-        JSONObject json = (JSONObject) JSONObject.toJSON(student);
-        // 结果处理
-        this.getResult(json);
+        JSONObject json = this.getResult(student);
         return json.toJSONString();
     }
 
-    private void getResult(JSONObject json) {
+    private JSONObject getResult(Student student) {
+        JSONObject json = null;
+        if (null == student) {
+            json = new JSONObject();
+        } else {
+            json = (JSONObject) JSONObject.toJSON(student);
+        }
         json.put("resultCode", "200");
         json.put("resuluMsg", "调用成功");
+
+        return json;
     }
 }

@@ -28,7 +28,7 @@
             <AppenderRef ref="RollingRandomAccessFile" />
         </Root>
 
-        <Logger name="com.xy.dao" level="${log.sql.level}" additivity="false">
+        <Logger name="com.com.xy.dao" level="${log.sql.level}" additivity="false">
             <AppenderRef ref="Console" />
         </Logger>
     </Loggers>

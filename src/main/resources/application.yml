@@ -3,13 +3,12 @@ server:
     servlet:
         context-path: /xiaoy
         display-name: springboot_study
-    #多环境配置读取配置项
-    profiles:
-        active: dev
 spring:
     application:
         name: springboot_study
-
+    #多环境配置读取配置项
+    profiles:
+        active: dev
 #Discovery Server Access
 eureka:
     client:
