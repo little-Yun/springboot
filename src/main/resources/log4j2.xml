@@ -29,7 +29,7 @@
         </Root>
 
         <Logger name="com.com.xy.dao" level="${log.sql.level}" additivity="false">
-            <AppenderRef ref="Console" />
+            <AppenderRef ref="error" />
         </Logger>
     </Loggers>
 </Configuration>
