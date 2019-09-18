@@ -1,5 +1,7 @@
 package com.xy.study.util;
 
+
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.springframework.util.StringUtils;
 
@@ -9,6 +11,7 @@ import java.util.Properties;
 /**
  * 获取配置文件工具类
  */
+@Slf4j
 public class PropertiesUtils {
 
     public static String PROPERTY_FILE = "config-properties";
@@ -22,12 +25,14 @@ public class PropertiesUtils {
         try {
             pro = PropertiesLoaderUtils.loadAllProperties(PROPERTY_FILE);
         } catch (IOException e) {
-            e.printStackTrace();
+           log.error("loadProperties exception:" ,e);
         }
 
-        String value = pro.getProperty(propertyName);
+        if(null == pro){
+            return null;
+        }
 
-        return value;
+        return pro.getProperty(propertyName);
     }
 
     public static void main(String[] args) {

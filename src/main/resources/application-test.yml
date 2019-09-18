@@ -1,5 +1,12 @@
 spring:
-  http: {encoding: {charset: UTF-8, enabled: true, force: true}}
-  datasource: {username: root, password: xiaoyun@123, driver-class-name: com.mysql.jdbc.Driver, url: 'jdbc:mysql://localhost:3306/spring_boot?useUnicode=true&characterEncoding=UTF-8'}
-com:
-  xy: {type: type, title: 吞吞, test: 测试}
+  http:
+    #解决读取配置文件乱码问题
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  datasource:
+    username: root
+    password: xiaoyun@123
+    driverName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/spring_boot?useUnicode=true&characterEncoding=UTF-8

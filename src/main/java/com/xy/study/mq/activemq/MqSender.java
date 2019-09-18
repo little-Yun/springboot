@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.jms.*;
 
+
 @SpringBootApplication
 public class MqSender {
 

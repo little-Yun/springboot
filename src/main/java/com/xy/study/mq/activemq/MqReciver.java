@@ -4,8 +4,9 @@ import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 import javax.jms.*;
+
+
 @SpringBootApplication
 public class MqReciver {
 
@@ -29,7 +30,7 @@ public class MqReciver {
             // 启动
             connection.start();
             // 获取操作连接
-            session = connection.createSession(Boolean.FALSE,Session.AUTO_ACKNOWLEDGE);
+            session = connection.createSession(Boolean.FALSE, Session.AUTO_ACKNOWLEDGE);
             // 获取session注意参数值xingbo.xu-queue是一个服务器的queue，须在在ActiveMq的console配置
             destination = session.createQueue("FirstQueue");
             consumer = session.createConsumer(destination);

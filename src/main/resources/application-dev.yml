@@ -10,6 +10,29 @@ spring:
         password: xiaoyun@123
         driverName: com.mysql.jdbc.Driver
         url: jdbc:mysql://localhost:3306/spring_boot?useUnicode=true&characterEncoding=UTF-8
+    rabbitmq:
+        host: 127.0.0.1
+        port: 5672
+        username: guest
+        password: guest
+        # 开启发送确认
+        publisher-confirms: false
+        # 开启发送失败退回
+        publisher-returns: true
+        # 开启ack
+        direct:
+            acknowledge-mode: manual
+        simple:
+            acknowledge-mode: manual
+activemq:
+    pass: admin
+    password: admin
+    inMemory: false
+    poolEnable: false
+    poolIdleTimeout: 30000
+    poolExpiryTimeout: 10000
+    poolMaxConnections: 50
+    brokerUrl: tcp://192.168.2.30:61616
 
 #springboot 获取配置文件三种方式
 com:
