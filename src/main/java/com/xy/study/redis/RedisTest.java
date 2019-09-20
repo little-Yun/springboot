@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import javax.annotation.Resource;
+
 @Slf4j
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = StudyApplication.class)
@@ -21,7 +22,7 @@ public class RedisTest {
      */
     @Test
     public void set() {
-        redisUtils.set("redis_key", "redis_vale");
+        redisUtils.set("redis_key", "redis_vale_test");
     }
 
     /**
@@ -30,6 +31,6 @@ public class RedisTest {
     @Test
     public void get() {
         String value = redisUtils.get("redis_key");
-       log.info("value:{}",value);
+        log.info("value:{}", value);
     }
 }

@@ -1,9 +1,11 @@
 package com.xy.study.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Component
 public class RedisUtils {
 
@@ -29,7 +31,7 @@ public class RedisUtils {
             redisTemplate.opsForValue().set(key, value);
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("save Exception:", e);
         }
         return result;
     }
@@ -43,7 +45,7 @@ public class RedisUtils {
             redisTemplate.opsForValue().getAndSet(key, value);
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("getAndSet Exception:", e);
         }
         return result;
     }
@@ -57,7 +59,7 @@ public class RedisUtils {
             redisTemplate.delete(key);
             result = true;
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("delete Exception:", e);
         }
         return result;
     }
