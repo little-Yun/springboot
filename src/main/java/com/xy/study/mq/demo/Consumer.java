@@ -1,7 +1,7 @@
 package com.xy.study.mq.demo;
 
 
-import org.springframework.jms.annotation.JmsListener;
+//import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Consumer {
 
-    @JmsListener(destination = "sample.queue")
+//    @JmsListener(destination = "sample.queue")
     public void receiveQueue(String text) {
         System.out.println(text);
     }
