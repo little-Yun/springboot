@@ -34,7 +34,6 @@ public class TestController {
     @ResponseBody
     public String queryStudentInfo(HttpServletRequest request) {
         String serverName = request.getServerName();
-        log.info("serverName:{}", serverName);
         String name = request.getParameter("name");
         Student student = testService.getStudentInfoByName(name);
         JSONObject json = this.getResult(student);
