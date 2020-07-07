@@ -1,35 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="trace">
+<!--设置log4j2的自身log级别为warn-->
+<!--日志级别以及优先级排序: OFF > FATAL > ERROR > WARN > INFO > DEBUG > TRACE > ALL -->
+<!--Configuration后面的status，这个用于设置log4j2自身内部的信息输出，可以不设置，当设置成trace时，你会看到log4j2内部各种详细输出-->
+<!--monitorInterval：Log4j能够自动检测修改配置 文件和重新配置本身，设置间隔秒数-->
+<Configuration status="info">
     <properties>
-        <property name="LOG_HOME">/Users/apple/Documents/logs/</property>
+        <property name="LOG_PATH">/Users/apple/Documents/logs/</property>
         <property name="FILE_NAME">mylog</property>
-        <!-- 数据库异常日志 -->
-        <property name="log.sql.level">info</property>
     </properties>
 
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:s.SSS} [%t] %-5level %l - %msg%n" />
-        </Console>
+        <!--这个输出控制台的配置-->
+        <console name="Console" target="SYSTEM_OUT">
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch） -->
+            <!--<ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!--输出日志的格式-->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}-%t] [%p] - %l - %msg%n"/>
+        </console>
 
-        <RollingRandomAccessFile name="RollingRandomAccessFile" fileName="${LOG_HOME}/${FILE_NAME}.log" filePattern="${LOG_HOME}/$${date:yyyy-MM}/${FILE_NAME}-%d{yyyy-MM-dd HH-mm}-%i.log">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %l - %msg%n"/>
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用-->
+        <!--<File name="log" fileName="log/test.log" append="false">-->
+        <!--<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %class{36} %L %M - %msg%xEx%n"/>-->
+        <!--</File>-->
+        <!-- 这个会打印出所有的info及以下级别的信息，每次大小超过size，
+        则这size大小的日志会自动存入按年份-月份建立的文件夹下面并进行压缩，作为存档-->
+        <RollingFile name="RollingFileInfo" fileName="${LOG_PATH}/${FILE_NAME}.log"  filePattern="${LOG_PATH}/${FILE_NAME}_%d{yyyy-MM-dd}.log">
+            <!--<Filters>-->
+            <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch-->
+            <!--<ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>-->
+            <!--<ThresholdFilter level="WARN" onMatch="DENY" onMismatch="NEUTRAL"/>-->
+            <!--</Filters>-->
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss:SSS}-%t] [%p] - %l - %m%n"/>
             <Policies>
-                <TimeBasedTriggeringPolicy interval="1"/>
-                <SizeBasedTriggeringPolicy size="10 MB"/>
+                <!--按照filePattern 时间单位 interval 间隔生成文件-->
+                <TimeBasedTriggeringPolicy modulate="true" interval="1"/>
+                <!--定了当日志文件达到了指定的size时，触发rollover操作。size参数可以用KB、MB、GB等做后缀来指定具体的字节数-->
+                <SizeBasedTriggeringPolicy size="1GB"/>
             </Policies>
-            <DefaultRolloverStrategy max="20"/>
-        </RollingRandomAccessFile>
+        </RollingFile>
     </Appenders>
 
-    <Loggers>
-        <Root level="info">
-            <AppenderRef ref="Console" />
-            <AppenderRef ref="RollingRandomAccessFile" />
-        </Root>
+    <!--然后定义logger，只有定义了logger并引入的appender，appender才会生效-->
+    <loggers>
+        <!--过滤掉spring和hibernate的一些无用的debug信息-->
+       <!-- <logger name="org.springframework" level="INFO"/>
+        <logger name="org.elasticsearch" level="INFO"/>
+        <logger name="com.jd.jsf.gd" level="warn"/>
+        <logger name="org.mybatis" level="INFO"/>-->
+        <!-- 将业务dao接口填写进去,并用控制台输出即可 -->
+        <logger name="com.xy.dao" level="debug" additivity="false">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+        </logger>
 
-        <Logger name="com.com.xy.dao" level="${log.sql.level}" additivity="false">
-            <AppenderRef ref="error" />
-        </Logger>
-    </Loggers>
+        <root level="info">
+            <appender-ref ref="Console"/>
+            <appender-ref ref="RollingFileInfo"/>
+        </root>
+    </loggers>
 </Configuration>

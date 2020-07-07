@@ -51,7 +51,7 @@ spring:
 
 #springboot 获取配置文件三种方式
 com:
-    xy:
-        type: type
-        title: 吞吞
-        test: 测试
+  xy:
+    type: type
+    title: 吞吞
+    test: 测试

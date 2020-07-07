@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class LogAspectAop {
 
-    @Pointcut("@annotation(com.xy.aop.LogAspect)")
+    @Pointcut("@annotation(com.xy.aop.LogAspect) || @annotation(org.springframework.web.bind.annotation.RequestMapping)")
     public void annotationPointcut() {
 
     }

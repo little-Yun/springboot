@@ -6,6 +6,8 @@ import com.xy.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestServiceImpl implements TestService{
 
@@ -15,6 +17,11 @@ public class TestServiceImpl implements TestService{
     @Override
     public Student getStudentInfoByName(String name) {
        return studentMapper.getStudentInfoByName(name);
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        return studentMapper.getAllStudents();
     }
 
     @Override

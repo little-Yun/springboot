@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <!--你接口的包名是com.abc.dao,接口名是NameMapper.java，那么你的mapper.xml的namespace应该是com.abc.dao.NameMapper-->
-<mapper namespace="com.com.xy.dao.StudentMapper">
+<mapper namespace="com.xy.dao.StudentMapper">
+    <resultMap id="resultMap" type="com.com.xy.bean.Student">
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="age" property="age" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <select id="getAllStudents" resultType="com.com.xy.bean.Student">
+        SELECT name,age FROM xy_data_student
+    </select>
 
     <select id="getStudentInfoByName" parameterType="String" resultType="com.com.xy.bean.Student">
         SELECT name,age FROM xy_data_student WHERE name = #{name}
     </select>
 
-    <insert id="saveStudentInfo" parameterType="Map">
+    <insert id="saveStudentInfo" parameterType="java.util.Map">
         insert into xy_data_student(name,age) values(#{name} ,#{age})
     </insert>
 </mapper>

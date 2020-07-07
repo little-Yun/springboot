@@ -7,11 +7,13 @@ import com.xy.service.TestService;
 import com.xy.bean.Student;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -22,9 +24,9 @@ public class TestController {
 
     @RequestMapping(value = "/add")
     @ResponseBody
-    public String add(HttpServletRequest request) {
-        String name = request.getParameter("name");
-        int age = Integer.valueOf(request.getParameter("age"));
+    public String add(@RequestBody Student student) {
+        String name = student.getName();
+        int age = student.getAge();
         testService.add(name, age);
 
         JSONObject json = this.getResult(null);
@@ -34,12 +36,18 @@ public class TestController {
     @RequestMapping(value = "/queryStudentInfo")
     @ResponseBody
     @LogAspect
-    public String queryStudentInfo(HttpServletRequest request) {
-        String serverName = request.getServerName();
-        String name = request.getParameter("name");
+    public String queryStudentInfo(Student stu) {
+        String name = stu.getName();
         Student student = testService.getStudentInfoByName(name);
         JSONObject json = this.getResult(student);
         return json.toJSONString();
+    }
+
+    @RequestMapping("/getAllStudents")
+    @ResponseBody
+    public List<Student> getAllStudents() {
+        List<Student> resultList = testService.getAllStudents();
+        return resultList;
     }
 
     private JSONObject getResult(Student student) {
