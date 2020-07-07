@@ -7,11 +7,11 @@
         <result column="age" property="age" jdbcType="INTEGER"/>
     </resultMap>
 
-    <select id="getAllStudents" resultType="com.xy.bean.Student">
+    <select id="getAllStudents" resultMap="resultMap">
         SELECT name,age FROM xy_data_student
     </select>
 
-    <select id="getStudentInfoByName" parameterType="String" resultType="com.xy.bean.Student">
+    <select id="getStudentInfoByName" parameterType="String" resultMap="resultMap">
         SELECT name,age FROM xy_data_student WHERE name = #{name}
     </select>
 
