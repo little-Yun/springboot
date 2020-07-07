@@ -2,6 +2,7 @@ package com.xy.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.xy.aop.LogAspect;
 import com.xy.service.TestService;
 import com.xy.bean.Student;
 import lombok.extern.slf4j.Slf4j;
@@ -32,6 +33,7 @@ public class TestController {
 
     @RequestMapping(value = "/queryStudentInfo")
     @ResponseBody
+    @LogAspect
     public String queryStudentInfo(HttpServletRequest request) {
         String serverName = request.getServerName();
         String name = request.getParameter("name");
