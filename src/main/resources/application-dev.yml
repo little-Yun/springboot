@@ -48,6 +48,15 @@ spring:
         broker-url: tcp://localhost:61616
         pool:
             enabled: false
+    sms:
+        template:
+            code: SMS_195861212
+            signName: 做饭包年服务
+            accessKeyId: LTAI4FzV8BanAvKJ7Nw7bSKe
+    httpconfig:
+        retryTimes: 0
+        connectionTimeOut: 10000
+        socketTimeOut: 10000
 
 #springboot 获取配置文件三种方式
 com:
