@@ -31,7 +31,7 @@ public class PortalHttpClientImpl implements PortalHttpClient {
         HttpEntity entity = null;
         T result = null;
         int resultCode = 0;
-        for (int i = 0; i < httpConfig.getRetryTimes(); i++) {
+        for (int i = 0; i <= httpConfig.getRetryTimes(); i++) {
             try {
                 ResponseEntity responseEntity = restTemplate.exchange(portalHttpRequest.getRequstUrl(), portalHttpRequest.getHttpMethod(), entity, cla);
                 resultCode = responseEntity.getStatusCodeValue();

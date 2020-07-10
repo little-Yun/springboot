@@ -17,11 +17,11 @@ import java.util.Map;
 @Slf4j
 @Component
 public class SmsSAOImpl implements SmsSAO {
-    @Value("spring.sms.template.code")
+    @Value("${spring.sms.template.code}")
     private String templateCode;
-    @Value("spring.sms.template.signName")
+    @Value("${spring.sms.template.signName}")
     private String signName;
-    @Value("spring.sms.template.accessKeyId")
+    @Value("${spring.sms.template.accessKeyId}")
     private String accessKeyId;
     @Autowired
     private PortalHttpClient client;
@@ -56,20 +56,19 @@ public class SmsSAOImpl implements SmsSAO {
         String hostUrl = SmsSAOImpl.SmsConstants.ALIYUN_SMS_HOST_URL;
         StringBuffer sub = new StringBuffer();
         sub.append(hostUrl).append("?").append("PhoneNumbers=").append(MapUtils.getString(params, "PhoneNumbers"));
-        sub.append("SignName=").append(signName);
-        sub.append("TemplateCode=").append(templateCode);
-        sub.append("AccessKeyId=").append(accessKeyId);
-        sub.append("Action=").append("SendSms");
+        sub.append("&SignName=").append(signName);
+        sub.append("&TemplateCode=").append(templateCode);
+        sub.append("&AccessKeyId=").append(accessKeyId);
+        sub.append("&Action=").append("SendSms");
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("code", SmsUtil.getRandomCode());
-        String templateParam = null;
-        sub.append("TemplateParam=").append(jsonObject.toJSONString());
+        sub.append("&TemplateParam=").append(jsonObject.toJSONString());
         return sub.toString();
     }
 
     public static class SmsConstants {
-        public static final String ALIYUN_SMS_HOST_URL = "dysmsapi.aliyuncs.com";
+        public static final String ALIYUN_SMS_HOST_URL = "http://dysmsapi.aliyuncs.com";
 
         public static final String SMS_SEND_SUCESS = "200";
 
