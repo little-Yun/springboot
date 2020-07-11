@@ -53,6 +53,7 @@ spring:
             code: SMS_195861212
             signName: 做饭包年服务
             accessKeyId: LTAI4FzV8BanAvKJ7Nw7bSKe
+            accessKeySecret: JLyJn3pp3zSzdFv3sQ9YNWqBEjYG2t
     httpconfig:
         retryTimes: 0
         connectionTimeOut: 10000

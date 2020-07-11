@@ -22,7 +22,7 @@ public class SmsController {
     @RequestMapping("/sendSms")
     public String sendSms(String mobileNo) {
         Map<String, Object> params = new HashMap<>();
-        params.put("PhoneNumbers", mobileNo);
+        params.put("phoneNumbers", mobileNo);
         return smsService.sendSms(params);
     }
 }
