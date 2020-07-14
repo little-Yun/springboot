@@ -32,7 +32,7 @@ public class SmsSAOImpl implements SmsSAO {
 
     @Override
     public String sendSms(Map<String, Object> params) {
-        //可自助调整超时时间
+        // 可自助调整超时时间
         System.setProperty("sun.net.client.defaultConnectTimeout", "10000");
         System.setProperty("sun.net.client.defaultReadTimeout", "10000");
 
@@ -64,7 +64,7 @@ public class SmsSAOImpl implements SmsSAO {
         //request.setSmsUpExtendCode("90997");
 
         //可选:outId为提供给业务方扩展字段,最终在短信回执消息中将此值带回给调用者
-        request.setOutId("yourOutId");
+//        request.setOutId("yourOutId");
 
         // hint 此处可能会抛出异常，注意catch
         try {
